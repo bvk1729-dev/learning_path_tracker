@@ -44,6 +44,7 @@ function setupSyncUI() {
     const tInput = document.getElementById('sync-github-token');
     const statusText = document.getElementById('sync-connection-status');
     const statusMsg = document.getElementById('sync-status-msg');
+    const logoutBtn = document.getElementById('btn-logout-sync');
 
     if (githubConfig) {
         uInput.value = githubConfig.username || '';
@@ -55,8 +56,10 @@ function setupSyncUI() {
     function updateConnectionStatus() {
         if (githubConfig.username && githubConfig.repo && githubConfig.token) {
             statusText.innerHTML = `<i class="ph ph-cloud-check" style="color:var(--accent-green)"></i> <span style="color:var(--accent-green)">Connected to ${githubConfig.username}/${githubConfig.repo}</span>`;
+            if (logoutBtn) logoutBtn.style.display = 'inline-flex';
         } else {
             statusText.innerHTML = `<i class="ph ph-cloud-slash"></i> Offline (Local Storage only)`;
+            if (logoutBtn) logoutBtn.style.display = 'none';
         }
     }
 
@@ -74,6 +77,24 @@ function setupSyncUI() {
         
         await loadState();
         renderAll();
+    });
+
+    logoutBtn?.addEventListener('click', async () => {
+        if (confirm("Are you sure you want to log out? This will clear your current local session data.")) {
+            saveGithubConfig({
+                username: '',
+                repo: 'learning_path_tracker',
+                token: ''
+            });
+            uInput.value = '';
+            rInput.value = 'learning_path_tracker';
+            tInput.value = '';
+            
+            await loadState();
+            renderAll();
+            updateConnectionStatus();
+            switchTab('sync-section');
+        }
     });
 
     document.getElementById('btn-sync-push')?.addEventListener('click', async () => {
