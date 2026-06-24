@@ -1,0 +1,14 @@
+[
+  {
+    "id": "1782318359443",
+    "title": "Responsive Web Design Certification",
+    "description": "This course teaches the fundamentals of HTML and CSS, including modern layout, design, accessibility, and responsive web development. You'll build practical projects and gain the skills to create professional, user-friendly webpages.",
+    "courseUrl": "https://www.freecodecamp.org/learn/responsive-web-design-v9/",
+    "providerId": "1782318359443",
+    "skillIds": [
+      "ds-55"
+    ],
+    "status": "In Progress",
+    "progress": 50
+  }
+]
