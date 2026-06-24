@@ -135,9 +135,14 @@ function setupSyncUI() {
 }
 
 // ====================================================
+// ====================================================
 // NAVIGATION
 // ====================================================
 function switchTab(targetId) {
+    if (!githubConfig.token) {
+        targetId = 'sync-section';
+    }
+
     const navItems = document.querySelectorAll('.nav-item');
     const sections = document.querySelectorAll('.content-section');
     navItems.forEach(n => n.classList.remove('active'));
@@ -148,7 +153,36 @@ function switchTab(targetId) {
     localStorage.setItem('certflowActiveTab', targetId);
 }
 
+function updateSidebarLocks() {
+    const isLoggedIn = !!githubConfig.token;
+    const navItems = document.querySelectorAll('.nav-item');
+    
+    navItems.forEach(item => {
+        const target = item.getAttribute('data-target');
+        if (target === 'sync-section') return; // Always keep Sync unlocked
+        
+        // Remove existing lock icon if present
+        const existingLock = item.querySelector('.ph-lock-simple');
+        if (existingLock) existingLock.remove();
+        
+        if (!isLoggedIn) {
+            item.style.opacity = '0.4';
+            item.style.pointerEvents = 'none';
+            // Add a lock icon
+            const lockIcon = document.createElement('i');
+            lockIcon.className = 'ph ph-lock-simple';
+            lockIcon.style.marginLeft = 'auto';
+            lockIcon.style.fontSize = '14px';
+            item.appendChild(lockIcon);
+        } else {
+            item.style.opacity = '1';
+            item.style.pointerEvents = 'auto';
+        }
+    });
+}
+
 function setupNavigation() {
+    updateSidebarLocks();
     // Restore tab if saved, else default to Home
     const savedTab = localStorage.getItem('certflowActiveTab') || 'home-section';
     switchTab(savedTab);
@@ -458,6 +492,7 @@ function setupForms() {
 // RENDER ALL
 // ====================================================
 function renderAll() {
+    updateSidebarLocks();
     renderProfile();
     renderProviderDropdown();
     renderCategoryDropdown();

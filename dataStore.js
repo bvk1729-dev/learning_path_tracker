@@ -12,32 +12,46 @@ export let appState = {
 export async function loadState() {
     let loadedFromGitHub = false;
     
-    // Always attempt to fetch
-    try {
-        const [ghCourses, ghSkills, ghProviders, ghCategories, ghProfile] = await Promise.all([
-            fetchFromGitHub('courses.json'),
-            fetchFromGitHub('skills.json'),
-            fetchFromGitHub('providers.json'),
-            fetchFromGitHub('categories.json'),
-            fetchFromGitHub('profile.json')
-        ]);
-        
-        if (ghCourses || ghSkills || ghProviders || ghCategories || ghProfile) {
-            appState.courses = ghCourses || [];
-            appState.skills = ghSkills || [];
-            appState.providers = ghProviders || [];
-            appState.categories = ghCategories || [];
-            appState.profile = ghProfile || {};
-            loadedFromGitHub = true;
+    // Only attempt to fetch if config and token are present
+    if (githubConfig.username && githubConfig.repo && githubConfig.token) {
+        try {
+            const [ghCourses, ghSkills, ghProviders, ghCategories, ghProfile] = await Promise.all([
+                fetchFromGitHub('courses.json'),
+                fetchFromGitHub('skills.json'),
+                fetchFromGitHub('providers.json'),
+                fetchFromGitHub('categories.json'),
+                fetchFromGitHub('profile.json')
+            ]);
+            
+            if (ghCourses || ghSkills || ghProviders || ghCategories || ghProfile) {
+                appState.courses = ghCourses || [];
+                appState.skills = ghSkills || [];
+                appState.providers = ghProviders || [];
+                appState.categories = ghCategories || [];
+                appState.profile = ghProfile || {};
+                loadedFromGitHub = true;
+            }
+        } catch (e) {
+            console.warn('Failed to load from GitHub', e);
         }
-    } catch (e) {
-        console.warn('Failed to load from data directory or GitHub, falling back to local storage', e);
     }
 
     if (!loadedFromGitHub) {
-        const saved = localStorage.getItem('certflowState');
-        if (saved) {
-            appState = JSON.parse(saved);
+        if (!githubConfig.token) {
+            // Unauthenticated state: Lock everything, reset appState to blank
+            appState = {
+                profile:    { name: 'Private Mode', role: 'Please log in', bio: 'Configure GitHub Sync to access your learning data.' },
+                categories: [],
+                providers:  [],
+                skills:     [],
+                courses:    []
+            };
+        } else {
+            // Authenticated but GitHub fetch failed (e.g. offline): Fallback to local storage
+            const saved = localStorage.getItem('certflowState');
+            if (saved) {
+                appState = JSON.parse(saved);
+            }
         }
     }
 

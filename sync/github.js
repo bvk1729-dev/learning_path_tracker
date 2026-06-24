@@ -29,18 +29,8 @@ export async function fetchFromGitHub(filename) {
                 return JSON.parse(contentStr);
             }
         } catch (e) {
-            console.warn(`API fetch failed for ${filename}, falling back to relative fetch...`, e);
+            console.warn(`API fetch failed for ${filename}`, e);
         }
-    }
-
-    // 2. Fallback to relative fetch for public visitors or if API fails
-    try {
-        const response = await fetch(`data/${filename}?t=${Date.now()}`);
-        if (response.ok) {
-            return await response.json();
-        }
-    } catch (e) {
-        console.warn(`Relative fetch failed for ${filename}`, e);
     }
     
     return null;
