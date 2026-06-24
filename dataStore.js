@@ -101,6 +101,8 @@ export async function loadState() {
     if (!loadedFromGitHub && !localStorage.getItem('certflowState')) {
         appState.categories = [...DEFAULT_CATEGORIES];
         appState.skills     = [...DEFAULT_SKILLS];
+        appState.courses    = [];
+        appState.providers  = [];
         appState.v2Merged   = true;
     }
 }

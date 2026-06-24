@@ -79,8 +79,17 @@ function setupSyncUI() {
         renderAll();
     });
 
-    logoutBtn?.addEventListener('click', async () => {
-        if (confirm("Are you sure you want to log out? This will clear your current local session data.")) {
+    logoutBtn?.addEventListener('click', () => {
+        const bodyHtml = `
+            <div style="font-size:15px; line-height:1.6; margin-bottom:20px; color:var(--text-primary);">
+                Are you sure you want to log out? This will clear your current local session data.
+            </div>
+            <div style="display:flex; justify-content:flex-end; gap:12px;">
+                <button class="btn secondary" onclick="closeEditModal()">Cancel</button>
+                <button id="edit-modal-save" class="btn primary" style="background-color:var(--accent-orange); border-color:var(--accent-orange); color:#fff;"><i class="ph ph-sign-out"></i> Yes, Log Out</button>
+            </div>
+        `;
+        openEditModal('Confirm Logout', bodyHtml, async () => {
             saveGithubConfig({
                 username: '',
                 repo: 'learning_path_tracker',
@@ -94,7 +103,7 @@ function setupSyncUI() {
             renderAll();
             updateConnectionStatus();
             switchTab('profile-section');
-        }
+        });
     });
 
     document.getElementById('btn-sync-push')?.addEventListener('click', async () => {
@@ -160,10 +169,6 @@ function setupSyncUI() {
 // NAVIGATION
 // ====================================================
 function switchTab(targetId) {
-    if (!githubConfig.token) {
-        targetId = 'profile-section';
-    }
-
     const navItems = document.querySelectorAll('.nav-item');
     const sections = document.querySelectorAll('.content-section');
     navItems.forEach(n => n.classList.remove('active'));
@@ -175,30 +180,13 @@ function switchTab(targetId) {
 }
 
 function updateSidebarLocks() {
-    const isLoggedIn = !!githubConfig.token;
+    // Locked states disabled per user request
     const navItems = document.querySelectorAll('.nav-item');
-    
     navItems.forEach(item => {
-        const target = item.getAttribute('data-target');
-        if (target === 'profile-section') return; // Always keep Profile unlocked
-        
-        // Remove existing lock icon if present
         const existingLock = item.querySelector('.ph-lock-simple');
         if (existingLock) existingLock.remove();
-        
-        if (!isLoggedIn) {
-            item.style.opacity = '0.4';
-            item.style.pointerEvents = 'none';
-            // Add a lock icon
-            const lockIcon = document.createElement('i');
-            lockIcon.className = 'ph ph-lock-simple';
-            lockIcon.style.marginLeft = 'auto';
-            lockIcon.style.fontSize = '14px';
-            item.appendChild(lockIcon);
-        } else {
-            item.style.opacity = '1';
-            item.style.pointerEvents = 'auto';
-        }
+        item.style.opacity = '1';
+        item.style.pointerEvents = 'auto';
     });
 }
 
