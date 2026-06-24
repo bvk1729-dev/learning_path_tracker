@@ -197,12 +197,35 @@ function setupNavigation() {
     switchTab(savedTab);
 
     document.querySelectorAll('.nav-item').forEach(item => {
-        item.addEventListener('click', () => switchTab(item.getAttribute('data-target')));
+        item.addEventListener('click', () => {
+            switchTab(item.getAttribute('data-target'));
+            // Auto-close sidebar on mobile/tablet
+            closeMobileSidebar();
+        });
     });
 
     document.querySelectorAll('.section-link[data-target]').forEach(link => {
         link.addEventListener('click', () => switchTab(link.getAttribute('data-target')));
     });
+
+    // Hamburger toggle
+    const menuToggle = document.getElementById('mobile-menu-toggle');
+    const backdrop = document.getElementById('sidebar-backdrop');
+    
+    menuToggle?.addEventListener('click', () => {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('open');
+        backdrop.classList.toggle('active');
+    });
+    
+    backdrop?.addEventListener('click', () => {
+        closeMobileSidebar();
+    });
+}
+
+function closeMobileSidebar() {
+    document.getElementById('sidebar')?.classList.remove('open');
+    document.getElementById('sidebar-backdrop')?.classList.remove('active');
 }
 
 // ====================================================
@@ -370,6 +393,8 @@ function openEditModal(title, bodyHtml, onSave) {
 function closeEditModal() {
     document.getElementById('edit-modal').classList.remove('active');
 }
+window.closeEditModal = closeEditModal;
+window.openEditModal = openEditModal;
 
 // ====================================================
 // INLINE UI WIRING
