@@ -34,5 +34,17 @@
     ],
     "status": "Completed",
     "progress": 100
+  },
+  {
+    "id": "1782522559154",
+    "title": "Claude Platform 101",
+    "description": "This course teaches developers to build on the Claude Developer Platform from the ground up, whether you've made a few API calls or have only used Claude through a chat window.",
+    "courseUrl": "https://anthropic.skilljar.com/claude-platform-101",
+    "providerId": "1782320719676",
+    "skillIds": [
+      "ds-33"
+    ],
+    "status": "Completed",
+    "progress": 100
   }
 ]
