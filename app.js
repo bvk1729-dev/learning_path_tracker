@@ -725,7 +725,7 @@ function renderModifyCourses() {
         const prov = appState.providers.find(p => p.id === c.providerId);
         let sc = c.status === 'Completed' ? 'completed' : c.status === 'In Progress' ? 'in-progress' : 'to-start';
         return `
-        <div class="modify-row" id="mrow-${c.id}">
+        <div class="modify-row" id="mrow-course-${c.id}">
             <div class="modify-cell main-cell">${c.title}</div>
             <div class="modify-cell">${prov ? prov.name : '—'}</div>
             <div class="modify-cell"><span class="status-badge ${sc}">${c.status}</span></div>
@@ -753,7 +753,7 @@ function renderModifyCourses() {
 
 function renderModifyProviders() {
     const rows = appState.providers.map(p => `
-        <div class="modify-row" id="mrow-${p.id}">
+        <div class="modify-row" id="mrow-provider-${p.id}">
             <div class="modify-cell main-cell">${p.name}</div>
             <div class="modify-cell">${p.url ? `<a href="${p.url}" target="_blank" style="color:var(--accent-blue);font-size:13px;">${p.url}</a>` : '—'}</div>
             <div class="modify-cell actions-cell">
@@ -780,7 +780,7 @@ function renderModifyCategories() {
     const rows = appState.categories.map(c => {
         const cnt = appState.skills.filter(s => s.categoryId === c.id).length;
         return `
-        <div class="modify-row" id="mrow-${c.id}">
+        <div class="modify-row" id="mrow-category-${c.id}">
             <div class="modify-cell main-cell"><span class="cat-badge cat-${c.color}">${c.name}</span></div>
             <div class="modify-cell">${cnt} skill${cnt !== 1 ? 's' : ''}</div>
             <div class="modify-cell actions-cell">
@@ -808,7 +808,7 @@ function renderModifySkills() {
     const rows = appState.skills.map(s => {
         const cat = appState.categories.find(c => c.id === s.categoryId);
         return `
-        <div class="modify-row" id="mrow-${s.id}">
+        <div class="modify-row" id="mrow-skill-${s.id}">
             <div class="modify-cell main-cell">${s.name}</div>
             <div class="modify-cell">${cat ? `<span class="cat-badge cat-${cat.color}">${cat.name}</span>` : '—'}</div>
             <div class="modify-cell actions-cell">
@@ -958,7 +958,7 @@ function editSkill(id) {
 // DELETE WITH INLINE CONFIRM
 // ====================================================
 function confirmDelete(type, id, label) {
-    const row = document.getElementById(`mrow-${id}`);
+    const row = document.getElementById(`mrow-${type}-${id}`);
     if (!row) return;
     // Replace actions cell with confirm UI
     const actionsCell = row.querySelector('.actions-cell');
