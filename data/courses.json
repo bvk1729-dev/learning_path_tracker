@@ -46,5 +46,17 @@
     ],
     "status": "Completed",
     "progress": 100
+  },
+  {
+    "id": "1782522598320",
+    "title": "Introduction to Claude Cowork",
+    "description": "Learn to work alongside Claude on your real files and projects. This hands-on course covers the Cowork task loop, skills and plugins, extending Claude into Chrome, Word, Excel, PowerPoint, and Outlook, and how to steer multi-step work responsibly — so you're productive in your first week.",
+    "courseUrl": "https://anthropic.skilljar.com/introduction-to-claude-cowork",
+    "providerId": "1782320719676",
+    "skillIds": [
+      "ds-33"
+    ],
+    "status": "Completed",
+    "progress": 100
   }
 ]
