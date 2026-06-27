@@ -10,5 +10,17 @@
     ],
     "status": "In Progress",
     "progress": 50
+  },
+  {
+    "id": "1782522228833",
+    "title": "Claude 101",
+    "description": "Learn how to use Claude for everyday work tasks, understand core features, and explore resources for more advanced learning on other topics.",
+    "courseUrl": "https://anthropic.skilljar.com/claude-101",
+    "providerId": "1782320719676",
+    "skillIds": [
+      "ds-33"
+    ],
+    "status": "Completed",
+    "progress": 0
   }
 ]
