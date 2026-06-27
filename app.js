@@ -535,8 +535,14 @@ function renderAll() {
     renderCategoryDropdown();
     renderHomeStats();
     renderHomePage();
+    const inProgress = appState.courses.filter(c => c.status === 'In Progress');
+    const toStart    = appState.courses.filter(c => c.status === 'To Start');
+    const completed  = appState.courses.filter(c => c.status === 'Completed');
+
     renderGrid('courses-grid',      appState.courses,   renderCourseCard,   'No courses yet. Go to Manage → Add New → Course.');
-    renderGrid('home-courses-grid', appState.courses,   renderCourseCard,   'No courses yet. Go to Manage to add some.');
+    renderGrid('home-courses-grid', inProgress,         renderCourseCard,   'No in-progress courses. Start one below!');
+    renderGrid('home-unstarted-courses-grid', toStart,  renderCourseCard,   'No new courses to start. Add one from Manage.');
+    renderGrid('home-completed-courses-grid', completed, renderCourseCard,  'No completed courses yet. Keep learning!');
     renderGrid('providers-grid',    appState.providers, renderProviderCard, 'No providers yet. Go to Manage → Add New → Provider.');
     renderSkillsPage();
     renderProgressList();
