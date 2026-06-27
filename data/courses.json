@@ -70,5 +70,17 @@
     ],
     "status": "In Progress",
     "progress": 25
+  },
+  {
+    "id": "1782525005266",
+    "title": "Python Certification",
+    "description": "This course teaches you the fundamentals of Python programming.\n\nTo earn your Python Certification:\n- Complete the five required projects to qualify for the certification exam.\n- Pass the Python Certification exam.",
+    "courseUrl": "https://www.freecodecamp.org/learn/python-v9/",
+    "providerId": "1782318359443",
+    "skillIds": [
+      "ds-1"
+    ],
+    "status": "To Start",
+    "progress": 0
   }
 ]
