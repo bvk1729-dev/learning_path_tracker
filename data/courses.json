@@ -1,0 +1,74 @@
+[
+  {
+    "id": "1782318359443",
+    "title": "Responsive Web Design Certification",
+    "description": "This course teaches the fundamentals of HTML and CSS, including modern layout, design, accessibility, and responsive web development. You'll build practical projects and gain the skills to create professional, user-friendly webpages.",
+    "courseUrl": "https://www.freecodecamp.org/learn/responsive-web-design-v9/",
+    "providerId": "1782318359443",
+    "skillIds": [
+      "ds-55"
+    ],
+    "status": "In Progress",
+    "progress": 50
+  },
+  {
+    "id": "1782522228833",
+    "title": "Claude 101",
+    "description": "Learn how to use Claude for everyday work tasks, understand core features, and explore resources for more advanced learning on other topics.",
+    "courseUrl": "https://anthropic.skilljar.com/claude-101",
+    "providerId": "1782320719676",
+    "skillIds": [
+      "ds-33"
+    ],
+    "status": "Completed",
+    "progress": 0
+  },
+  {
+    "id": "1782522518641",
+    "title": "Claude Code 101",
+    "description": "Learn how to use Claude Code effectively in your daily development workflow.",
+    "courseUrl": "https://anthropic.skilljar.com/claude-code-101",
+    "providerId": "1782320719676",
+    "skillIds": [
+      "ds-33"
+    ],
+    "status": "Completed",
+    "progress": 100
+  },
+  {
+    "id": "1782522559154",
+    "title": "Claude Platform 101",
+    "description": "This course teaches developers to build on the Claude Developer Platform from the ground up, whether you've made a few API calls or have only used Claude through a chat window.",
+    "courseUrl": "https://anthropic.skilljar.com/claude-platform-101",
+    "providerId": "1782320719676",
+    "skillIds": [
+      "ds-33"
+    ],
+    "status": "Completed",
+    "progress": 100
+  },
+  {
+    "id": "1782522598320",
+    "title": "Introduction to Claude Cowork",
+    "description": "Learn to work alongside Claude on your real files and projects. This hands-on course covers the Cowork task loop, skills and plugins, extending Claude into Chrome, Word, Excel, PowerPoint, and Outlook, and how to steer multi-step work responsibly — so you're productive in your first week.",
+    "courseUrl": "https://anthropic.skilljar.com/introduction-to-claude-cowork",
+    "providerId": "1782320719676",
+    "skillIds": [
+      "ds-33"
+    ],
+    "status": "Completed",
+    "progress": 100
+  },
+  {
+    "id": "1782522635080",
+    "title": "Claude Code in Action",
+    "description": "Practical walkthrough of using Claude Code to accelerate your development workflow",
+    "courseUrl": "https://anthropic.skilljar.com/claude-code-in-action",
+    "providerId": "1782320719676",
+    "skillIds": [
+      "ds-33"
+    ],
+    "status": "In Progress",
+    "progress": 25
+  }
+]
